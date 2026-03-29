@@ -47,22 +47,7 @@ body {
   height: 100vh;
 }
 
-/* ═══════════════════════════════════════
-   CSS GRID OVERLAY BACKGROUND
-   Zero JS. Pure CSS depth grid.
-   ═══════════════════════════════════════ */
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
 
 /* ═══════════════════════════════════════
    SELECTION
@@ -113,12 +98,7 @@ body::before {
     background: var(--border-strong);
   }
 
-  .grid-overlay {
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-  }
+
 
   .snap-container {
     height: 100vh;
