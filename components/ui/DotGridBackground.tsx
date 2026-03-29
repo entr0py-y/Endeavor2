@@ -135,80 +135,9 @@ export default function DotGridBackground({ isInverted = false, currentSection =
             transitionProgress.current += (targetColorProgress - transitionProgress.current) * transitionSpeed;
             const progress = transitionProgress.current;
 
-            // Create dynamic gradient background (moving fog)
-            const gradient = ctx.createLinearGradient(0, 0, 0, height);
-
-            // Animate gradient colors with more pronounced breathing effect
-            const t = elapsed * 0.8; // Faster color breathing
-            const breathe = Math.sin(t) * 8; // Larger breathing amplitude
-            const breathe2 = Math.sin(t * 0.7 + 1) * 6;
-            const breathe3 = Math.sin(t * 0.5 + 2) * 5;
-
-            // Subtle hue shift for more life
-            const hueShift = Math.sin(t * 0.3) * 5;
-
-            // Lerp between normal and inverted theme colors based on progress
-            // DARKER: Normal: dark grey (35/30/20), Inverted: darker grey (30/25/18)
-            const topLightness = lerp(35 + breathe, 30 + breathe * 0.7, progress);
-            const midLightness = lerp(30 + breathe2, 25 + breathe2 * 0.7, progress);
-            const botLightness = lerp(20 + breathe3, 18 + breathe3 * 0.7, progress);
-            const saturation = lerp(15 + Math.sin(t) * 3, 12 + Math.sin(t) * 2, progress);
-
-            const topColor = `hsl(${220 + hueShift}, ${saturation}%, ${topLightness}%)`;
-            const midColor = `hsl(${225 + hueShift}, ${saturation}%, ${midLightness}%)`;
-            const botColor = `hsl(${220 + hueShift}, ${saturation}%, ${botLightness}%)`;
-
-            gradient.addColorStop(0, topColor);
-            gradient.addColorStop(0.5, midColor);
-            gradient.addColorStop(1, botColor);
-
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, width, height);
-
-            // Draw organic cloud patches - irregular shapes that blend into background
-            const cloudTime = elapsed * 0.2;
-
-            // Multiple overlapping ellipses create irregular organic shapes
-            const cloudPatches = [
-                { baseX: 0.2, baseY: 0.3, scaleX: 1.8, scaleY: 0.6, size: 350, speed: 0.15, phase: 0 },
-                { baseX: 0.7, baseY: 0.2, scaleX: 0.7, scaleY: 1.5, size: 280, speed: 0.12, phase: 1.5 },
-                { baseX: 0.5, baseY: 0.7, scaleX: 1.4, scaleY: 0.8, size: 320, speed: 0.1, phase: 3 },
-                { baseX: 0.15, baseY: 0.8, scaleX: 1.2, scaleY: 1.6, size: 260, speed: 0.18, phase: 4.5 },
-                { baseX: 0.85, baseY: 0.5, scaleX: 0.9, scaleY: 1.3, size: 300, speed: 0.14, phase: 2.2 },
-                { baseX: 0.4, baseY: 0.15, scaleX: 1.6, scaleY: 0.5, size: 240, speed: 0.11, phase: 5.8 },
-            ];
-
-            cloudPatches.forEach((cloud, i) => {
-                // Slow drifting motion
-                const driftX = Math.sin(cloudTime * cloud.speed + cloud.phase) * width * 0.08;
-                const driftY = Math.cos(cloudTime * cloud.speed * 0.7 + cloud.phase) * height * 0.05;
-
-                const cx = cloud.baseX * width + driftX;
-                const cy = cloud.baseY * height + driftY;
-                const radius = cloud.size + Math.sin(cloudTime * 0.5 + i) * 30;
-
-                // Save context for ellipse transform
-                ctx.save();
-                ctx.translate(cx, cy);
-                ctx.scale(cloud.scaleX, cloud.scaleY);
-
-                // Very subtle radial gradient - almost invisible
-                const cloudGradient = ctx.createRadialGradient(0, 0, 0, 0, 0, radius);
-                const cloudBrightness = lerp(42, 38, progress) + Math.sin(cloudTime * 0.4 + i * 0.7) * 3;
-
-                // Very low opacity for seamless blending
-                cloudGradient.addColorStop(0, `hsla(${220 + hueShift}, 10%, ${cloudBrightness}%, 0.12)`);
-                cloudGradient.addColorStop(0.4, `hsla(${222 + hueShift}, 8%, ${cloudBrightness - 3}%, 0.06)`);
-                cloudGradient.addColorStop(0.7, `hsla(${218 + hueShift}, 6%, ${cloudBrightness - 5}%, 0.02)`);
-                cloudGradient.addColorStop(1, 'transparent');
-
-                ctx.fillStyle = cloudGradient;
-                ctx.beginPath();
-                ctx.arc(0, 0, radius, 0, Math.PI * 2);
-                ctx.fill();
-
-                ctx.restore();
-            });
+            // Clear canvas completely to make it transparent
+            // Allows the global monochrome CSS --bg-base to shine through
+            ctx.clearRect(0, 0, width, height);
 
             const mx = mouseRef.current.x;
             const my = mouseRef.current.y;
