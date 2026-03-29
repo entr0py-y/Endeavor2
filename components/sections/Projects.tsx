@@ -20,7 +20,7 @@ interface ProjectsProps {
 
 export default function Projects({ meta, projects }: ProjectsProps) {
   return (
-    <section id="projects" className="relative py-24">
+    <section id="projects" className="relative snap-section py-12">
       <div className="w-full max-w-container mx-auto px-6 lg:px-12">
         <motion.div
           variants={fadeInUp}

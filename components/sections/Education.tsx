@@ -18,7 +18,7 @@ interface EducationProps {
 
 export default function Education({ meta, education }: EducationProps) {
   return (
-    <section id="education" className="relative py-24">
+    <section id="education" className="relative snap-section py-12">
       <div className="w-full max-w-container mx-auto px-6 lg:px-12">
         <motion.div
           variants={fadeInUp}

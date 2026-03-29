@@ -19,10 +19,8 @@ export default function Home() {
       <ParticleBackground />
       <Navbar items={portfolioData.navItems} />
 
-      <main className="relative z-10">
+      <main className="relative z-10 snap-container">
         <Hero data={portfolioData.hero} />
-
-        <div className="section-divider" />
 
         <Skills
           meta={portfolioData.skillsMeta}
@@ -42,7 +40,6 @@ export default function Home() {
         <Connect data={portfolioData.connect} />
       </main>
 
-      <Footer data={portfolioData.footer} />
     </>
   );
 }

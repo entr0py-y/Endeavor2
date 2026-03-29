@@ -48,7 +48,7 @@ export default function Hero({ data }: HeroProps) {
   return (
     <section
       id="identity"
-      className="relative min-h-screen flex items-center"
+      className="relative snap-section"
     >
       <div className="w-full max-w-container mx-auto px-6 lg:px-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

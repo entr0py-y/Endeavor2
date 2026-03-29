@@ -19,7 +19,7 @@ interface SkillsProps {
 
 export default function Skills({ meta, skills }: SkillsProps) {
   return (
-    <section id="skills" className="relative py-24">
+    <section id="skills" className="relative snap-section py-12">
       <div className="w-full max-w-container mx-auto px-6 lg:px-12">
         <motion.div
           variants={fadeInUp}

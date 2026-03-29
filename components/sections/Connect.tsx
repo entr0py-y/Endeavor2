@@ -8,6 +8,8 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 import Button from "@/components/ui/Button";
+import { portfolioData } from "@/data/portfolio";
+import Footer from "@/components/layout/Footer";
 import { fadeInUp, staggerContainer, staggerItem, viewportOnce } from "@/lib/animations";
 import type { ConnectData } from "@/lib/types";
 
@@ -23,7 +25,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string; size?: n
 
 export default function Connect({ data }: ConnectProps) {
   return (
-    <section id="connect" className="relative py-24">
+    <section id="connect" className="relative snap-section py-12">
       <div className="w-full max-w-container mx-auto px-6 lg:px-12">
         <motion.div
           variants={staggerContainer}
@@ -86,6 +88,11 @@ export default function Connect({ data }: ConnectProps) {
             })}
           </motion.div>
         </motion.div>
+      </div>
+
+      {/* Pin footer to the bottom of the final slide */}
+      <div className="absolute bottom-0 left-0 w-full px-6 pb-6">
+        <Footer data={portfolioData.footer} />
       </div>
     </section>
   );
