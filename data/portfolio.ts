@@ -112,7 +112,7 @@ export const portfolioData: PortfolioData = {
       description:
         "An AI-powered assistive wearable system designed to enhance environmental awareness for visually impaired individuals. It integrates real-time object detection, intelligent feedback systems, and adaptive navigation support using computer vision technologies.",
       tags: ["AI", "Computer Vision", "Wearable", "Accessibility"],
-      image: "/projects/visionaid.png",
+      image: "/projects/VisionAid.jpg",
       link: "#",
       linkLabel: "VIEW PROJECT →",
     },
@@ -122,7 +122,7 @@ export const portfolioData: PortfolioData = {
       description:
         "SweepX is a map-based, gamified platform that turns real-world cleanliness into interactive quests. Users report trash locations, which are converted into location-based cleanup missions with points and rewards.",
       tags: ["Gamification", "Maps", "React", "Node.js"],
-      image: "/projects/sweepx.png",
+      image: "/projects/SweepX.jpg",
       link: "#",
       linkLabel: "VIEW PROJECT →",
     },
@@ -132,7 +132,7 @@ export const portfolioData: PortfolioData = {
       description:
         "A performance-optimized interactive developer portfolio featuring modular architecture, refined motion design, and a monochrome anti-gravity aesthetic built with Next.js and Framer Motion.",
       tags: ["Next.js", "Framer Motion", "TypeScript", "Design"],
-      image: "/projects/portfolio.png",
+      image: "/projects/Portfolio.jpg",
       link: "#",
       linkLabel: "VIEW PROJECT →",
     },
