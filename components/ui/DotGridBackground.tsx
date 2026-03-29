@@ -11,15 +11,20 @@ export default function DotGridBackground({ isInverted = false, currentSection =
     const mouseRef = useRef({ x: -1000, y: -1000 });
     const animationRef = useRef<number>();
     const isInvertedRef = useRef(isInverted);
+    const sectionIndexRef = useRef(currentSection); // Moved up to use inside animate
     const transitionProgress = useRef(isInverted ? 1 : 0); // 0 = normal, 1 = inverted
     const performanceEngineRef = useRef<ReturnType<typeof getPerformanceEngine> | null>(null);
     const lastRenderTimeRef = useRef(0);
     const scaleRef = useRef(2); // Start at scale 2 (Low Density for Section 0)
 
-    // Update ref when prop changes
+    // Update refs when props change
     useEffect(() => {
         isInvertedRef.current = isInverted;
     }, [isInverted]);
+
+    useEffect(() => {
+        sectionIndexRef.current = currentSection;
+    }, [currentSection]);
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -115,9 +120,9 @@ export default function DotGridBackground({ isInverted = false, currentSection =
             const targetColorProgress = isInvertedRef.current ? 1 : 0;
 
             // Smooth transition for scale (density)
-            // Section 0 (Identity) & 4 (Connect) -> Scale 2 (Low Density / Spread Out)
-            // Section 1, 2, 3 (Skills, Projects, Education) -> Scale 1 (High Density / Compact)
-            const targetScale = (currentSection === 0 || currentSection === 4) ? 2 : 1;
+            // Alternate dot grid scaling every slide (Even slides = Scale 2 / Odd slides = Scale 1)
+            const activeSec = sectionIndexRef.current;
+            const targetScale = (activeSec % 2 === 0) ? 2 : 1;
             
             scaleRef.current += (targetScale - scaleRef.current) * scaleSpeed;
             const currentScale = scaleRef.current;
@@ -320,25 +325,7 @@ export default function DotGridBackground({ isInverted = false, currentSection =
                 cancelAnimationFrame(animationRef.current);
             }
         };
-    }, [currentSection]); // Re-run effect if needed, though most logic is inside animate frame using currentSection prop won't work in closure unless ref
-    
-    // We need to keep track of currentSection for the animation loop
-    // But typical React closure trap.
-    // Better to use a valid ref for currentSection to access latest value in loop without re-binding everything
-    const sectionIndexRef = useRef(currentSection);
-    useEffect(() => {
-        sectionIndexRef.current = currentSection;
-    }, [currentSection]);
-
-    // Update animate loop to use sectionIndexRef.current instead of currentSection directly 
-    // Wait, I put logic inside `animate` which is defined inside `useEffect`.
-    // So I need to make sure `animate` uses the LATEST section.
-    // But my `useEffect` dependency array was `[currentSection]`.
-    // Re-creating the effect on every section change is NOT efficient for a canvas animation (re-init context, re-create dots).
-    // Better approach: Use a Ref for `currentSection` and remove it from dependency array.
-    
-    // Let me rewrite the component slightly to use the Ref approach to avoid full re-mounts.
-    // The replace_file_content is replacing the whole function anyway.
+    }, []); // Empty dependency array, relies entirely on sectionIndexRef to prevent canvas re-mounts on slide change
     
     return (
         <canvas
