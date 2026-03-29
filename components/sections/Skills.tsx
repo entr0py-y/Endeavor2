@@ -76,8 +76,9 @@ export default function Skills({ meta, skills }: SkillsProps) {
         </motion.div>
       </div>
 
-      {/* Section divider */}
-      <div className="section-divider mt-24" />
+      {/* Slide bottom framing line */}
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-border-subtle" />
+
     </section>
   );
 }

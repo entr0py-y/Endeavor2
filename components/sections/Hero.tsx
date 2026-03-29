@@ -249,6 +249,9 @@ export default function Hero({ data }: HeroProps) {
           </motion.div>
         </div>
       </div>
+
+      {/* Slide bottom framing line */}
+      <div className="absolute bottom-0 left-0 w-full h-[1px] bg-border-subtle" />
     </section>
   );
 }
