@@ -8,7 +8,7 @@
 import { useEffect, useState } from "react";
 import { portfolioData } from "@/data/portfolio";
 import Navbar from "@/components/layout/Navbar";
-import DotGridBackground from "@/components/ui/DotGridBackground";
+import TesseractBackground from "@/components/ui/TesseractBackground";
 import Hero from "@/components/sections/Hero";
 import Skills from "@/components/sections/Skills";
 import Projects from "@/components/sections/Projects";
@@ -43,7 +43,7 @@ export default function Home() {
   return (
     <>
       {/* Background dynamically reacts to activeSection integer */}
-      <DotGridBackground currentSection={activeSection} isInverted={false} />
+      <TesseractBackground currentSection={activeSection} />
       
       <Navbar items={portfolioData.navItems} />
 
