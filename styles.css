@@ -325,7 +325,7 @@ body::before {
   
   /* Scale background character to prevent overflow */
   .bg-character {
-    width: 80vw;
-    max-width: 350px;
+    width: 110vw;
+    max-width: 480px;
   }
 }
